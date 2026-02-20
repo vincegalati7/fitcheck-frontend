@@ -1,0 +1,50 @@
+<div class="container mt-5">
+  <div class="card shadow-sm border-0">
+    <div class="card-header bg-success text-white py-3">
+      <h4 class="mb-0"><i class="bi bi-rulers me-2"></i>Elenco Taglie</h4>
+    </div>
+
+    <div class="card-body p-4">
+      <div class="row g-3 mb-4">
+        <div class="col-md-10">
+          <input type="text" class="form-control form-control-lg shadow-sm"
+                 [(ngModel)]="newSizeName"
+                 (keyup.enter)="saveSize()"
+                 placeholder="Esempio: S, M, L, 42, 44...">
+        </div>
+        <div class="col-md-2">
+          <button class="btn btn-success btn-lg w-100 shadow-sm d-flex align-items-center justify-content-center"
+                  (click)="saveSize()" title="Aggiungi nuova taglia">
+            <i class="bi bi-plus-lg"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-hover align-middle">
+          <thead class="table-light">
+          <tr>
+            <th class="ps-3">Nome Taglia</th>
+            <th class="text-end pe-3">Azioni</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let s of sizes">
+            <td class="ps-3 fw-bold text-dark">{{ s.name }}</td>
+            <td class="text-end pe-3">
+              <button class="btn btn-outline-danger btn-sm border-0"
+                      (click)="deleteSize(s.id!)" title="Rimuovi">
+                <i class="bi bi-trash3 fs-5"></i>
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div *ngIf="sizes.length === 0" class="text-center py-5">
+        <p class="text-muted mb-0">Nessuna taglia in archivio. Aggiungine una!</p>
+      </div>
+    </div>
+  </div>
+</div>

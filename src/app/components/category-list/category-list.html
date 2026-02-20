@@ -1,0 +1,50 @@
+<div class="container mt-5">
+  <div class="card shadow-sm border-0">
+    <div class="card-header bg-warning text-dark py-3">
+      <h4 class="mb-0"><i class="bi bi-folder2-open me-2"></i>Elenco Categorie</h4>
+    </div>
+
+    <div class="card-body p-4">
+      <div class="row g-3 mb-4">
+        <div class="col-md-10">
+          <input type="text" class="form-control form-control-lg shadow-sm"
+                 [(ngModel)]="newCategoryName"
+                 (keyup.enter)="saveCategory()"
+                 placeholder="Esempio: Scarpe, Abbigliamento, Accessori...">
+        </div>
+        <div class="col-md-2">
+          <button class="btn btn-warning btn-lg w-100 shadow-sm d-flex align-items-center justify-content-center"
+                  (click)="saveCategory()" title="Aggiungi nuova categoria">
+            <i class="bi bi-plus-lg"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-hover align-middle">
+          <thead class="table-light">
+          <tr>
+            <th class="ps-3">Nome Categoria</th>
+            <th class="text-end pe-3">Azioni</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let c of categories">
+            <td class="ps-3 fw-bold text-dark">{{ c.name }}</td>
+            <td class="text-end pe-3">
+              <button class="btn btn-outline-danger btn-sm border-0"
+                      (click)="deleteCategory(c.id!)" title="Rimuovi">
+                <i class="bi bi-trash3 fs-5"></i>
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div *ngIf="categories.length === 0" class="text-center py-5">
+        <p class="text-muted mb-0">Nessuna categoria in archivio. Aggiungine una!</p>
+      </div>
+    </div>
+  </div>
+</div>

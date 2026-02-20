@@ -1,0 +1,53 @@
+<div class="container mt-5">
+  <div class="card shadow-sm border-0">
+    <div class="card-header bg-primary text-white py-3">
+      <h4 class="mb-0">Elenco Brand</h4>
+    </div>
+
+    <div class="card-body p-4">
+      <div class="row g-3 mb-4">
+        <div class="col-md-10">
+          <input type="text" class="form-control form-control-lg shadow-sm"
+                 [(ngModel)]="newBrandName"
+                 placeholder="Inserisci un nuovo brand...">
+        </div>
+        <div class="col-md-2">
+          <button class="btn btn-success btn-lg w-100 shadow-sm d-flex align-items-center justify-content-center"
+                  (click)="saveBrand()"
+                  title="Aggiungi nuovo brand">
+            <i class="bi bi-plus-lg"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead class="table-light">
+          <tr>
+            <th class="ps-3">Nome del Brand</th>
+            <th class="text-end pe-3">Azioni</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let b of brands">
+            <td class="ps-3 align-middle">
+              <span class="fw-bold text-dark">{{ b.name }}</span>
+            </td>
+            <td class="text-end pe-3">
+              <button class="btn btn-outline-danger btn-sm px-2"
+                      (click)="deleteBrand(b.id!)"
+                      title="Elimina brand">
+                <i class="bi bi-trash3"></i>
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div *ngIf="brands.length === 0" class="text-center py-5">
+        <p class="text-muted mb-0">Nessun brand in archivio.</p>
+      </div>
+    </div>
+  </div>
+</div>
