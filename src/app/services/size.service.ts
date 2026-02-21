@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 export interface Size {
-  id?: string;
+  uuid?: string;
   name: string;
   deleted?: boolean;
 }

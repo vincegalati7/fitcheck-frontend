@@ -10,9 +10,11 @@ export interface Clothe {
   brandUuid: string;       // Cambiato da brandId
   categoryUuid: string;    // Cambiato da categoryId
   sizeUuid: string;        // Aggiunto perché presente nel tuo JSON
+  compositionUuid: string;
   brandName?: string;
   categoryName?: string;
   sizeName?: string;
+  compositionName?: string;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -25,8 +27,28 @@ export class ClotheService {
     return this.http.get<Clothe[]>(this.apiUrl);
   }
 
-  saveClothe(clothe: Clothe): Observable<Clothe> {
-    return this.http.post<Clothe>(this.apiUrl, clothe);
+saveClothe(clothe: any, image: File | null): Observable<any> {
+    const formData = new FormData();
+
+    console.log('clothe' + JSON.stringify(clothe))
+
+    // Pulizia undefined per evitare stringhe "undefined"
+    const cleanClothe = {
+      ...clothe,
+      brandUuid: clothe.brandUuid || null,
+      categoryUuid: clothe.categoryUuid || null,
+      sizeUuid: clothe.sizeUuid || null,
+      compositionUuid: clothe.compositionUuid || null
+    };
+
+    formData.append('clothe', JSON.stringify(cleanClothe));
+    if (image) {
+      formData.append('image', image);
+    }
+
+      console.log('clothe' + JSON.stringify(cleanClothe))
+
+    return this.http.post(this.apiUrl, formData);
   }
 
   deleteClothe(id: string): Observable<void> {
